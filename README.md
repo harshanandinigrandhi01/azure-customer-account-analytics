@@ -37,6 +37,10 @@ Source CSV Files → Bronze (Raw) → Silver (Cleaned) → Gold (Business-Ready)
 5. Data validation and testing.
 6. Power BI dashboard creation.
 
+## Project Architecture
+
+![Azure Customer Account Analytics Architecture](Docs/architecture.png)
+
 ## Project Status
 In Progress
 
