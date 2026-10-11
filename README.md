@@ -29,6 +29,11 @@ This project implements an end-to-end data pipeline to process customer account 
 ## Pipeline Architecture
 Source CSV Files → Bronze (Raw) → Silver (Cleaned) → Gold (Business-Ready) → Azure SQL Database → Power BI
 
+## Project Architecture
+
+![Azure Customer Account Analytics Architecture](Screenshots/Architecture.png)
+
+
 ## Implementation Steps
 1. Data ingestion from source storage into Bronze.
 2. Data cleaning and validation in Silver.
@@ -36,10 +41,6 @@ Source CSV Files → Bronze (Raw) → Silver (Cleaned) → Gold (Business-Ready)
 4. SCD Type 1 upsert into Azure SQL Database.
 5. Data validation and testing.
 6. Power BI dashboard creation.
-
-## Project Architecture
-
-![Azure Customer Account Analytics Architecture](Docs/architecture.png)
 
 ## Project Status
 In Progress
