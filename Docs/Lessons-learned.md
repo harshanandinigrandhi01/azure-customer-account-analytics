@@ -31,3 +31,16 @@ Although primary key names can be derived dynamically from file names, naming co
 **Outcome:** Adopted the configuration-based approach to manage file-to-primary-key mappings.
 
 ![Dynamic File Name and Primary Key Mapping](Dynamic File Name.png)
+
+### 3. Cleaning the Data Challanges
+
+| Issue | Cause | Fix / lesson |
+|---|---|---|
+| `customers.csv` not accepted as debug value | Parameter values are expressions | Use quotes: `'customers.csv'` |
+| "Allow schema drift" option missing | Only exists for Integration datasets | Inline sources already accept any columns |
+| "Type mismatch" in casttypes | Expression put in the column-name box; column types unknown at design time | Name box = `$$`; wrap values in `toString($$)` |
+| Dates came out null | Format letters are case-sensitive (`YYYY`/`DD` ≠ `yyyy`/`dd`) | Use `yyyy-MM-dd`; `MM` = month, `mm` = minutes |
+| Dates looked like `14-01-2024` | Excel re-displays dates in the PC's local format | Inspect raw data in Notepad or ADF Data preview, never Excel |
+| Warning on `byName` in validate | Return type unknown at design time | `toString(byName($pkvalue))` |
+| Silver-layer data stored as a Delta table instead of a single file | Delta format stores data in a folder containing multiple Parquet files and a transaction log. Spark writes data in parallel across multiple files. | Use Delta format, Remember that a Delta table is a folder, not a single file. |
+
