@@ -44,3 +44,20 @@ Although primary key names can be derived dynamically from file names, naming co
 | Warning on `byName` in validate | Return type unknown at design time | `toString(byName($pkvalue))` |
 | Silver-layer data stored as a Delta table instead of a single file | Delta format stores data in a folder containing multiple Parquet files and a transaction log. Spark writes data in parallel across multiple files. | Use Delta format, Remember that a Delta table is a folder, not a single file. |
 
+### Business Needs :
+
+| Issue | Cause | Fix / lesson |
+|---|---|---|
+| "Column not found" in gold flows | No schema imported on the source | Click **Import schema** in table-specific flows (the generic silver flow is the only one without it) |
+| Helper `pk` column showed up in silver tables | Fixed mapping in a generic Select can't drop a drifted column | Rule-based mapping `name != 'pk'` in silver; deleted the old silver folders and reran p2 |
+| Import schema showed no data | Dims hadn't been run yet | Debug-run upstream flows first |
+| Totals 3× too high (planned joins) | **Fan-out:** joining a customer to 2 accounts and 3 loans gives 2 × 3 = 6 rows | Aggregate each table to one row per customer, then join |
+| Customers missing from 360 | First join was accounts ↔ loans | Always start from `dim_customer` and chain left joins |
+| `count(total_balance >= 10000)` counted everyone | `count()` counts non-null values, and `false` isn't null | `countIf(...)`, or group by segment with `count()` |
+| Column not visible inside the same Derived column | A Derived column can't use a column created in itself | Put helper columns (`monthly_rate`) in an earlier Derived column |
+| EMI null for 0% loans | Formula becomes 0 / 0 | `iif(monthly_rate == 0, loan_amount / loan_term, ...)` |
+| Outstanding came out negative | Subtraction in the wrong order | `total_payable - total_paid` |
+| Every loan would show Overdue | Comparing 2024 dates with today | As-of-date parameter |
+| `lag(x, 1, 0)` made month-on-month % wrong | Default 0 claims "last month was zero" and divides by zero | `lag(x, 1)` (null) and guard with `iif` |
+| `'tnx_sum*100'` returned text | Quotes make a string, not a calculation | No quotes around expressions |
+| Considered the Wait activity for ordering | Wait just sleeps for N seconds | Use On success dependency arrows |

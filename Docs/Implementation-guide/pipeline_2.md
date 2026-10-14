@@ -1,32 +1,8 @@
-# Implementation Guide
+# Bronze-to-Silver Data Transformation (Cleaning the Data)
 
-## 1. Resources and Setup
+**Summary:** Standardized the initial handling of source data, trimmed whitespace, handled null and NA values, converted columns to the appropriate data types, added audit columns, and validated primary keys by handling nulls and duplicates. Finally, loaded the cleaned data into the Silver layer in Delta format.
 
-### 1.1. Azure Storage Account Setup
-- Created an Azure Storage Account named `customer_analytics` with **Hierarchical Namespace enabled** to support Azure Data Lake Storage Gen2 capabilities.
-- Created separate containers to organize source files and data processing layers: `source`, `bronze`, `silver`, and `gold`.
-- Uploaded below five source CSV files into the `source` container. Source Files - `accounts.csv`, `customers.csv`, `loans.csv`, `loan_payments.csv`, `transactions.csv`
-
-### 1.2. Azure Synapse Analytics Setup
-- Created an Azure Synapse Analytics workspace to build and manage the data integration pipeline.
-- Configured the required connectivity between Azure Storage and Synapse using linked services and datasets.
-
----
-
-## 2. Source-to-Bronze Data Ingestion
-- Created a pipeline named `pl_source_to_bronze` in Azure Synapse Analytics.
-- Added a **Copy Data activity** to ingest CSV files from the `source` container into the `bronze` container.
-- Configured the source dataset with the `*.csv` wildcard pattern to select all matching CSV files.
-- Configured the sink dataset to write the copied files to the `bronze` layer.
-- Executed the pipeline and verified that all five CSV files were successfully copied from `source` to `bronze`.
-
-![Source-to-Bronze Data Ingestion](Screenshots/Copy_activity.png)
-
----
-
-## 3. Bronze-to-Silver Data Transformation (Cleaning the Data)
-
-### 3.1. Dynamic Pipeline Configuration and File Processing
+## 1. Dynamic Pipeline Configuration and File Processing
 
 - Created a pipeline named `pl_bronze_to_silver` in Azure Synapse Analytics to dynamically process and clean files from the Bronze layer.
 - Added a **Lookup activity** to read file names and primary key mappings from the configuration file.
@@ -34,7 +10,7 @@
 
 ![Dynamic Pipeline](Dynamic Pipeline.png)
 
-### 3.2. Data Flow Configuration
+## 2. Data Flow Configuration
 
 - Created a Data Flow named `df_data_cleaning` with three parameters: `sourceFile`, `pkValue`, and `targetFolder`.
 - Configured the dataflow parameters to dynamically read from for-each values using parameters.
