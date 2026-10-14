@@ -30,7 +30,7 @@ Although primary key names can be derived dynamically from file names, naming co
 
 **Outcome:** Adopted the configuration-based approach to manage file-to-primary-key mappings.
 
-![Dynamic File Name and Primary Key Mapping](Dynamic File Name.png)
+![Dynamic File Name and Primary Key Mapping](Screenshots/Dynamic File Name.png)
 
 ### 3. Cleaning the Data Challanges
 

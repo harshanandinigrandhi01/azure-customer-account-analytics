@@ -8,14 +8,14 @@
 - Added a **Lookup activity** to read file names and primary key mappings from the configuration file.
 - Used a **ForEach activity** to iterate through the configured file entries.
 
-![Dynamic Pipeline](Dynamic Pipeline.png)
+![Dynamic Pipeline](Screenshots/Dynamic Pipeline.png)
 
 ## 2. Data Flow Configuration
 
 - Created a Data Flow named `df_data_cleaning` with three parameters: `sourceFile`, `pkValue`, and `targetFolder`.
 - Configured the dataflow parameters to dynamically read from for-each values using parameters.
 
-![Data Flow](Data Flow.png)
+![Data Flow](Screenshots/Data Flow.png)
 
 
 ```
@@ -83,7 +83,7 @@ Result: one row per primary key (like `drop_duplicates(subset=pk, keep='first')`
 
 Each table gets its own folder because a **Delta table is a folder**: parquet part files plus a `_delta_log` transaction log. Sharing a folder would merge tables into one broken table.
 
-![Cleaning Dataflow](Cleaning Dataflow.png)
+![Cleaning Dataflow](Screenshots/Cleaning Dataflow.png)
 
 ---
 
