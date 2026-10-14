@@ -83,6 +83,6 @@ Result: one row per primary key (like `drop_duplicates(subset=pk, keep='first')`
 
 Each table gets its own folder because a **Delta table is a folder**: parquet part files plus a `_delta_log` transaction log. Sharing a folder would merge tables into one broken table.
 
-![Cleaning Dataflow](../../Screenshots\Cleaning_Dataflow.png)
+![Cleaning Dataflow](../../Screenshots/Cleaning_Dataflow.png)
 
 ---
