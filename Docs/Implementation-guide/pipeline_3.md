@@ -37,7 +37,7 @@ All sinks: **Inline Delta**, container `gold`, folder = table name, **Overwrite*
 
 ## pl3_sliver_to_gold :
 
-![pl3_sliver_to_gold](Screenshots/pl3_sliver_to_gold.png)
+![pl3_sliver_to_gold](../../Screenshots/pl3_sliver_to_gold.png)
 
 ---
 
@@ -55,15 +55,15 @@ Each dim flow: Source (with **Import schema**) → Select (keep business columns
 
 ## df_dim_loans:
 
-![df_dim_loans](Screenshots/df_dim_loans.png)
+![df_dim_loans](../../Screenshots/df_dim_loans.png)
 
 ## df_dim_customers:
 
-![df_dim_customers](Screenshots/df_dim_customers.png)
+![df_dim_customers](../../Screenshots/df_dim_customers.png)
 
 ## df_dim_accounts:
 
-![df_dim_accounts](Screenshots/df_dim_accounts.png)
+![df_dim_accounts](../../Screenshots/df_dim_accounts.png)
 
 ### 3.2 Facts
 | Table | Grain | Built from | Join |
@@ -80,11 +80,11 @@ Both would work today. Reading gold means facts and reports use the **same** ver
 
 ## df_fact_loan_transactions:
 
-![df_fact_loan_transactions](Screenshots/df_fact_loan_transactions.png)
+![df_fact_loan_transactions](../../Screenshots/df_fact_loan_transactions.png)
 
 ## df_fact_transactions:
 
-![df_fact_transactions](Screenshots/df_fact_transactions.png)
+![df_fact_transactions](../../Screenshots/df_fact_transactions.png)
 
 ---
 
@@ -120,7 +120,7 @@ dim_customer ─ joinCustAcc ─ joinCustLoans ─ joinCustPaym ─ joinCustTran
 
 ## df_mart_customer_360 :
 
-![df_mart_customer_360](Screenshots/df_mart_customer_360.png)
+![df_mart_customer_360](../../Screenshots/df_mart_customer_360.png)
 
 
 ### 4.2 `mart_loan_summary`: "How healthy is our loan book?"
@@ -167,7 +167,7 @@ case(isNull(days_since_last_payment), 'No Payments',
 
 ## df_mart_loan_summary :
 
-![df_mart_loan_summary](Screenshots/df_mart_loan_summary.png)
+![df_mart_loan_summary](../../Screenshots/df_mart_loan_summary.png)
 
 ### 4.3 `mart_monthly_transactions`: "How are deposits and withdrawals trending?"
 **Grain:** one row per year + month + transaction type.
@@ -191,7 +191,7 @@ The first month of each type has no previous month, so its change is **null** (u
 
 ## df_mart_transactions :
 
-![df_mart_transactions](Screenshots/df_mart_transactions.png)
+![df_mart_transactions](../../Screenshots/df_mart_transactions.png)
 
 ---
 
