@@ -51,8 +51,6 @@ All sinks: **Inline Delta**, container `gold`, folder = table name, **Overwrite*
 | `dim_account` | account | silver/accounts | keeps `customer_id` as the link to the customer |
 | `dim_loan` | loan | silver/loans | keeps `customer_id` as the link to the customer |
 
-Each dim flow: Source (with **Import schema**) → Select (keep business columns, drop helper/lineage columns) → Sink.
-
 ## df_dim_loans:
 
 ![df_dim_loans](../../Screenshots/df_dim_loans.png)
@@ -103,7 +101,7 @@ dim_customer ─ joinCustAcc ─ joinCustLoans ─ joinCustPaym ─ joinCustTran
 |---|---|---|
 | dim_account | customer_id | `num_accounts`, `total_balance` |
 | dim_loan | customer_id | `num_loans`, `total_loan_amount` |
-| fact_loan_payments | customer_id | total of payments, latest payment date |
+| fact_loan_payments | customer_id | `total_payment_amount`, `latest_payment_date` |
 | fact_transactions | customer_id | `total_transaction_amount`, `last_transaction_date` |
 
 - All joins are **left outer**, starting from `dim_customer`, so every customer gets a row (even with no accounts or loans).
