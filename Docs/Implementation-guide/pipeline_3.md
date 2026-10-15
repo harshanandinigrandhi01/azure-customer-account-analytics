@@ -102,7 +102,7 @@ dim_customer ─ joinCustAcc ─ joinCustLoans ─ joinCustPaym ─ joinCustTran
 | dim_account | customer_id | `num_accounts`, `total_balance` |
 | dim_loan | customer_id | `num_loans`, `total_loan_amount` |
 | fact_loan_payments | customer_id | `total_payment_amount`, `latest_payment_date` |
-| fact_transactions | customer_id | `total_transaction_amount`, `last_transaction_date` |
+| fact_transactions | customer_id | `total_transaction_amount`, `latest_transaction_date` |
 
 - All joins are **left outer**, starting from `dim_customer`, so every customer gets a row (even with no accounts or loans).
 - A final Select keeps only one `customer_id` (each join brings its own copy).
@@ -111,10 +111,10 @@ dim_customer ─ joinCustAcc ─ joinCustLoans ─ joinCustPaym ─ joinCustTran
 | Column | Expression / rule |
 |---|---|
 | counts and totals | `coalesce(col, 0)` (column pattern: `startsWith(name,'num_') \|\| startsWith(name,'total_')`) |
-| `outstanding_loan` | `total_loan_amount - total_loan_payment_amount` |
+| `outstanding_loan` | `total_loan_amount - total_payment_amount` |
 | `customer_segment` | `case(total_balance >= 8000, 'Premium', total_balance >= 4000, 'Gold', total_balance >= 1000, 'Silver', 'Standard')` |
 
-`last_transaction_date` is **not** coalesced: there is no "zero date", so null correctly means "never transacted".
+`latest_transaction_date` is **not** coalesced: there is no "zero date", so null correctly means "never transacted".
 
 ## df_mart_customer_360 :
 
