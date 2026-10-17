@@ -35,9 +35,9 @@ dim_loan     → fact_loan_payments  ──┬────┘
 
 All sinks: **Inline Delta**, container `gold`, folder = table name, **Overwrite** (safe to rerun).
 
-### pl3_sliver_to_gold :
+## pl3_sliver_to_gold :
 
-![pl3_sliver_to_gold](pl3_sliver_to_gold.png)
+![pl3_sliver_to_gold](../../Screenshots/pl3_sliver_to_gold.png)
 
 ---
 
@@ -51,19 +51,17 @@ All sinks: **Inline Delta**, container `gold`, folder = table name, **Overwrite*
 | `dim_account` | account | silver/accounts | keeps `customer_id` as the link to the customer |
 | `dim_loan` | loan | silver/loans | keeps `customer_id` as the link to the customer |
 
-Each dim flow: Source (with **Import schema**) → Select (keep business columns, drop helper/lineage columns) → Sink.
+## df_dim_loans:
 
-### df_dim_loans:
+![df_dim_loans](../../Screenshots/df_dim_loans.png)
 
-![df_dim_loans](df_dim_loans.png)
+## df_dim_customers:
 
-### df_dim_customers:
+![df_dim_customers](../../Screenshots/df_dim_customers.png)
 
-![df_dim_customers](df_dim_customers.png)
+## df_dim_accounts:
 
-### df_dim_accounts:
-
-![df_dim_accounts](df_dim_accounts.png)
+![df_dim_accounts](../../Screenshots/df_dim_accounts.png)
 
 ### 3.2 Facts
 | Table | Grain | Built from | Join |
@@ -78,13 +76,13 @@ Each dim flow: Source (with **Import schema**) → Select (keep business columns
 ### Why facts read the **gold** dims, not silver
 Both would work today. Reading gold means facts and reports use the **same** version of an account or loan. If a gold rule is added later (e.g. remove closed accounts), the facts follow it automatically. The trade-off: facts must wait for the dims instead of running in parallel.
 
-### df_fact_loan_transactions:
+## df_fact_loan_transactions:
 
-![df_fact_loan_transactions](df_fact_loan_transactions.png)
+![df_fact_loan_transactions](../../Screenshots/df_fact_loan_transactions.png)
 
-### df_fact_transactions:
+## df_fact_transactions:
 
-![df_fact_transactions](df_fact_transactions.png)
+![df_fact_transactions](../../Screenshots/df_fact_transactions.png)
 
 ---
 
@@ -103,8 +101,8 @@ dim_customer ─ joinCustAcc ─ joinCustLoans ─ joinCustPaym ─ joinCustTran
 |---|---|---|
 | dim_account | customer_id | `num_accounts`, `total_balance` |
 | dim_loan | customer_id | `num_loans`, `total_loan_amount` |
-| fact_loan_payments | customer_id | total of payments, latest payment date |
-| fact_transactions | customer_id | `total_transaction_amount`, `last_transaction_date` |
+| fact_loan_payments | customer_id | `total_payment_amount`, `latest_payment_date` |
+| fact_transactions | customer_id | `total_transaction_amount`, `latest_transaction_date` |
 
 - All joins are **left outer**, starting from `dim_customer`, so every customer gets a row (even with no accounts or loans).
 - A final Select keeps only one `customer_id` (each join brings its own copy).
@@ -113,14 +111,14 @@ dim_customer ─ joinCustAcc ─ joinCustLoans ─ joinCustPaym ─ joinCustTran
 | Column | Expression / rule |
 |---|---|
 | counts and totals | `coalesce(col, 0)` (column pattern: `startsWith(name,'num_') \|\| startsWith(name,'total_')`) |
-| `outstanding_loan` | `total_loan_amount - total_loan_payment_amount` |
+| `outstanding_loan` | `total_loan_amount - total_payment_amount` |
 | `customer_segment` | `case(total_balance >= 8000, 'Premium', total_balance >= 4000, 'Gold', total_balance >= 1000, 'Silver', 'Standard')` |
 
-`last_transaction_date` is **not** coalesced: there is no "zero date", so null correctly means "never transacted".
+`latest_transaction_date` is **not** coalesced: there is no "zero date", so null correctly means "never transacted".
 
-### df_mart_customer_360 :
+## df_mart_customer_360 :
 
-![df_mart_customer_360](df_mart_customer_360.png)
+![df_mart_customer_360](../../Screenshots/df_mart_customer_360.png)
 
 
 ### 4.2 `mart_loan_summary`: "How healthy is our loan book?"
@@ -165,9 +163,9 @@ case(isNull(days_since_last_payment), 'No Payments',
 
 **Data flow parameter `asofdate`** (string). In p3 it is set to `'2024-04-30'` (latest payment in the sample data is 2024-04-10). In production the pipeline would pass today's date, with no change to the data flow.
 
-### df_mart_loan_summary :
+## df_mart_loan_summary :
 
-![df_mart_loan_summary](df_mart_loan_summary.png)
+![df_mart_loan_summary](../../Screenshots/df_mart_loan_summary.png)
 
 ### 4.3 `mart_monthly_transactions`: "How are deposits and withdrawals trending?"
 **Grain:** one row per year + month + transaction type.
@@ -189,9 +187,9 @@ iif(isNull(previous_month_total) || previous_month_total == 0,
 ```
 The first month of each type has no previous month, so its change is **null** (unknown), not 0.
 
-### df_mart_transactions :
+## df_mart_transactions :
 
-![df_mart_transactions](df_mart_transactions.png)
+![df_mart_transactions](../../Screenshots/df_mart_transactions.png)
 
 ---
 

@@ -30,7 +30,7 @@ Although primary key names can be derived dynamically from file names, naming co
 
 **Outcome:** Adopted the configuration-based approach to manage file-to-primary-key mappings.
 
-![Dynamic File Name and Primary Key Mapping](Dynamic File Name.png)
+![Dynamic File Name and Primary Key Mapping](Screenshots/Dynamic File Name.png)
 
 ### 3. Cleaning the Data Challanges
 
@@ -61,3 +61,38 @@ Although primary key names can be derived dynamically from file names, naming co
 | `lag(x, 1, 0)` made month-on-month % wrong | Default 0 claims "last month was zero" and divides by zero | `lag(x, 1)` (null) and guard with `iif` |
 | `'tnx_sum*100'` returned text | Quotes make a string, not a calculation | No quotes around expressions |
 | Considered the Wait activity for ordering | Wait just sleeps for N seconds | Use On success dependency arrows |
+
+
+## Data quality finding: orphan loans and accounts
+The source data has **87 customers**, but loans and accounts reference **more customer_ids** than that. With foreign keys on the SQL tables, inserts failed (FK conflict).
+
+Found with an **Exists** transformation (*Doesn't exist*): gold dim_loan vs gold dim_customer on `customer_id`. Exists works like `WHERE NOT EXISTS` in SQL: it filters, it doesn't add columns.
+
+| Option | Result | Chosen? |
+|---|---|---|
+| Drop the FK constraints | Everything loads; relationships are no longer enforced by SQL | ✅ Now (common in data warehouses) |
+| Inferred ("Unknown") customer rows for missing ids | FKs stay; real customer overwrites the placeholder later via SCD-1 | 🔜 Enhancement |
+| Reject orphans to quarantine | Real loans disappear from reports | ❌ Not for a bank |
+
+```sql
+ALTER TABLE dbo.dim_loans DROP CONSTRAINT <fk_name>;
+SELECT name FROM sys.foreign_keys WHERE parent_object_id = OBJECT_ID('dbo.dim_accounts');
+```
+
+---
+
+## 9. Pipeline 4
+| Issue | Cause | Fix / lesson |
+|---|---|---|
+| "Allowing delete, upsert, or update requires an Alter Row transformation" | Alter Row removed from the update branch | Update/upsert/delete sinks always need an Alter Row before them |
+| Pipeline run failed on a data flow parameter | Parameter had no value in debug | Give data flow parameters a default (e.g. `'debug_run'`) |
+| Can't use `$` parameter in the dataset | Datasets only see **dataset** parameters | `@dataset().tablename`, value supplied by the pipeline / debug settings |
+| *Schema "dbo." does not exist* | Typed `dbo.` in the schema box | Schema = `dbo`; ADF adds the dot itself |
+| FK conflict inserting loans/accounts | Orphan customer_ids in the source data | Investigated with Exists; dropped FKs, documented the issue |
+| Rows with a missing hash never updated | `null != value` isn't `true` | Null-safe condition with `isNull(tgt_hash_col) \|\|` |
+| Considered including the key/audit columns in the hash | Audit columns change every run | Hash only business columns (+ FKs), never PK or audit columns |
+| Hash and audit columns NULL in SQL for loans/accounts, no error | Sink output name `src_hash_col` (and audit names) didn't match the SQL column names; the sink silently drops columns the target table doesn't have | Output names in the sink Mapping must match SQL exactly. Found via Monitor → data flow details: sink showed 5 columns kept, 7 dropped |
+| created_by showed `debug_run` in Data preview | Data preview always runs in data flow debug, which uses the parameter's default | Check the real value after a pipeline run; the activity passes `@pipeline().Pipeline` |
+| Upsert vs Update + Insert | Upsert can't keep `created_date` untouched on updates | Separate insert and update branches |
+
+---

@@ -5,4 +5,5 @@
 - Configured the sink dataset to write the copied files to the `bronze` layer.
 - Executed the pipeline and verified that all five CSV files were successfully copied from `source` to `bronze`.
 
-![Source-to-Bronze Data Ingestion](Screenshots/Copy_activity.png)
+
+![Source-to-Bronze Data Ingestion](../../Screenshots/Copy_activity.png)
