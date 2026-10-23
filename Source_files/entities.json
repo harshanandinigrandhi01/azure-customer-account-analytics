@@ -1,0 +1,7 @@
+[
+  {"entity": "accounts",     "source_file": "accounts.csv",     "pk_columns": "account_id",     "target_folder": "accounts",     "is_active": true},
+  {"entity": "customers",    "source_file": "customers.csv",    "pk_columns": "customer_id",    "target_folder": "customers",    "is_active": true},
+  {"entity": "loans",        "source_file": "loans.csv",        "pk_columns": "loan_id",        "target_folder": "loans",        "is_active": true},
+  {"entity": "payments",     "source_file": "payments.csv",     "pk_columns": "payment_id",     "target_folder": "payments",     "is_active": true},
+  {"entity": "transactions", "source_file": "transactions.csv", "pk_columns": "transaction_id", "target_folder": "transactions", "is_active": true}
+]

@@ -1,0 +1,88 @@
+customer_id,first_name,last_name,address,city,state,zip
+1,John,Doe,123 Elm St,Toronto,ON,M4B1B3
+2,Jane,Smith,456 Maple Ave,Ottawa,ON,K1A0B1
+3,Michael,Johnson,789 Oak Dr,Montreal,QC,H1A1A1
+4,Emily,Davis,101 Pine Rd,Calgary,AB,T2A0A1
+5,David,Wilson,202 Birch Blvd,Vancouver,BC,V5K0A1
+6,Emma,Clark,505 Cedar St,Halifax,NS,B3H0A1
+7,James,Martinez,606 Spruce Ln,Winnipeg,MB,R3C0A1
+8,Olivia,Garcia,707 Fir St,Edmonton,AB,T5A0A1
+9,William,Lopez,808 Redwood Dr,Victoria,BC,V8W0A1
+10,Ava,Anderson,909 Cypress Ave,Quebec City,QC,G1A0A1
+11,Alexander,Thomas,1010 Willow Rd,St. John's,NL,A1A0A1
+12,Isabella,Lee,1111 Poplar St,Fredericton,NB,E3B0A1
+13,Daniel,Harris,1212 Ash Blvd,Charlottetown,PE,C1A0A1
+14,Sophia,Young,1313 Beech Dr,Yellowknife,NT,X1A0A1
+15,Matthew,King,1414 Cedar Ln,Whitehorse,YT,Y1A0A1
+16,Charlotte,Scott,1515 Elm St,Iqaluit,NU,X0A0A1
+17,Joseph,Green,1616 Maple Ave,Regina,SK,S4P0A1
+18,Amelia,Adams,1717 Oak Dr,Saskatoon,SK,S7K0A1
+19,Christopher,Baker,1818 Pine Rd,Thunder Bay,ON,P7A0A1
+20,Mia,Nelson,1919 Birch Blvd,London,ON,N6A0A1
+21,Andrew,Mitchell,2020 Spruce Ln,Hamilton,ON,L8P0A1
+22,Harper,Roberts,2121 Fir St,Kitchener,ON,N2G0A1
+23,Joshua,Turner,2222 Redwood Dr,Windsor,ON,N9A0A1
+24,Evelyn,Phillips,2323 Cypress Ave,Kingston,ON,K7L0A1
+25,Daniel,Campbell,2424 Willow Rd,St. Catharines,ON,L2R0A1
+26,Abigail,Parker,2525 Poplar St,Barrie,ON,L4M0A1
+27,James,Evans,2626 Ash Blvd,Guelph,ON,N1H0A1
+28,Emily,Edwards,2727 Beech Dr,Brantford,ON,N3T0A1
+29,Michael,Collins,2828 Cedar Ln,Thunder Bay,ON,P7B0A1
+30,Elizabeth,Stewart,2929 Elm St,Peterborough,ON,K9H0A1
+31,David,Sanchez,3030 Maple Ave,North Bay,ON,P1B0A1
+32,Sophia,Morris,3131 Oak Dr,Belleville,ON,K8N0A1
+33,John,Rogers,3232 Pine Rd,Timmins,ON,P4N0A1
+34,Olivia,Reed,3333 Birch Blvd,Orillia,ON,L3V0A1
+35,William,Cook,3434 Spruce Ln,Midland,ON,L4R0A1
+36,Ava,Morgan,3535 Fir St,Collingwood,ON,L9Y0A1
+37,Alexander,Bell,3636 Redwood Dr,Stratford,ON,N5A0A1
+38,Isabella,Murphy,3737 Cypress Ave,Woodstock,ON,N4S0A1
+39,Daniel,Bailey,3838 Willow Rd,Orangeville,ON,L9W0A1
+40,Sophia,Rivera,3939 Poplar St,Milton,ON,L9T0A1
+41,Matthew,Cooper,4040 Ash Blvd,Georgetown,ON,L7G0A1
+42,Charlotte,Richardson,4141 Beech Dr,Newmarket,ON,L3Y0A1
+43,Joseph,Cox,4242 Cedar Ln,Aurora,ON,L4G0A1
+44,Amelia,Howard,4343 Elm St,Bradford,ON,L3Z0A1
+45,Christopher,Ward,4444 Maple Ave,Keswick,ON,L4P0A1
+46,Mia,Brooks,4545 Oak Dr,Stouffville,ON,L4A0A1
+47,Andrew,Gray,4646 Pine Rd,Uxbridge,ON,L9P0A1
+48,Harper,James,4747 Birch Blvd,Port Perry,ON,L9L0A1
+49,Joshua,Bennett,4848 Spruce Ln,Beaverton,ON,L0K0A1
+50,Evelyn,Barnes,4949 Fir St,Sutton,ON,L0E0A1
+51,Daniel,Ross,5050 Redwood Dr,Pefferlaw,ON,L0E0A1
+52,Abigail,Henderson,5151 Cypress Ave,Mount Albert,ON,L0G0A1
+53,James,Jenkins,5252 Willow Rd,Queensville,ON,L0G0A1
+54,Emily,Perry,5353 Poplar St,Sharon,ON,L0G0A1
+55,Michael,Butler,5454 Ash Blvd,Holland Landing,ON,L9N0A1
+56,Elizabeth,Long,5555 Beech Dr,East Gwillimbury,ON,L9N0A1
+57,David,Patterson,5656 Cedar Ln,King City,ON,L7B0A1
+58,Sophia,Hughes,5757 Elm St,Nobleton,ON,L0G0A1
+59,John,Flores,5858 Maple Ave,Schomberg,ON,L0G0A1
+60,Olivia,Washington,5959 Oak Dr,Tottenham,ON,L0G0A1
+61,William,Butler,6060 Pine Rd,Alliston,ON,L9R0A1
+62,Ava,Simmons,6161 Birch Blvd,Angus,ON,L0M0A1
+63,Alexander,Foster,6262 Spruce Ln,Stayner,ON,L0M0A1
+64,Isabella,Gonzalez,6363 Fir St,Wasaga Beach,ON,L9Z0A1
+65,Daniel,Bryant,6464 Redwood Dr,Elmvale,ON,L0L0A1
+66,Sophia,Alexander,6565 Cypress Ave,Midland,ON,L4R0A1
+67,Matthew,Russell,6666 Willow Rd,Penetanguishene,ON,L9M0A1
+68,Charlotte,Griffin,6767 Poplar St,Victoria Harbour,ON,L0K0A1
+69,Joseph,Diaz,6868 Ash Blvd,Port McNicoll,ON,L0K0A1
+70,Amelia,Hayes,6969 Beech Dr,Waubaushene,ON,L0K0A1
+71,Christopher,Myers,7070 Cedar Ln,Coldwater,ON,L0K0A1
+72,Mia,Ford,7171 Elm St,Orillia,ON,L3V0A1
+73,Andrew,Hamilton,7272 Maple Ave,Gravenhurst,ON,P1P0A1
+74,Harper,Graham,7373 Oak Dr,Bala,ON,P0C0A1
+75,Joshua,Sullivan,7474 Pine Rd,Bracebridge,ON,P1L0A1
+76,Evelyn,Wallace,7575 Birch Blvd,Huntsville,ON,P1H0A1
+77,Daniel,Woods,7676 Spruce Ln,Burks Falls,ON,P0A0A1
+78,Abigail,Cole,7777 Fir St,Sundridge,ON,P0A0A1
+79,James,West,7878 Redwood Dr,South River,ON,P0A0A1
+80,Emily,Jordan,7979 Cypress Ave,North Bay,ON,P1B0A1
+81,Michael,Owens,8080 Willow Rd,Mattawa,ON,P0H0A1
+82,Elizabeth,Reynolds,8181 Poplar St,Sturgeon Falls,ON,P2B0A1
+83,David,Fisher,8282 Ash Blvd,Verner,ON,P0H0A1
+84,Sophia,Ellis,8383 Beech Dr,Field,ON,P0H0A1
+85,John,Harrison,8484 Cedar Ln,Temagami,ON,P0H0A1
+86,Olivia,Gibson,8585 Elm St,New Liskeard,ON,P0J0A1
+87,William,McDonald,8686 Maple Ave,Haileybury,,
